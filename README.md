@@ -1,69 +1,140 @@
-# CodeIgniter 4 Application Starter
+# 💼 Sistem Informasi Penggajian (SIP Payroll)
 
-## What is CodeIgniter?
+[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
+[![Framework](https://img.shields.io/badge/CodeIgniter-4.7-EF4223?style=for-the-badge&logo=codeigniter&logoColor=white)](https://codeigniter.com/)
+[![Database](https://img.shields.io/badge/MySQL-8.0%2B-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+**Sistem Informasi Penggajian (SIP Payroll)** adalah aplikasi web berbasis **CodeIgniter 4** yang dirancang untuk mengotomatisasi proses perhitungan gaji karyawan, pemotongan PPh 21 dan BPJS (Kesehatan & Ketenagakerjaan), serta menyediakan layanan mandiri (self-service) slip gaji bagi karyawan.
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+---
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## 📌 Fitur Utama
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+### 👨‍💼 Role Admin
+- **Dashboard Overview**: Ringkasan jumlah karyawan aktif, departemen, dan status periode payroll.
+- **Manajemen Data Master**:
+  - Kelola Data Departemen & Jabatan.
+  - Kelola Data Karyawan (Data pribadi, NPWP, Rekening Bank, BPJS Kesehatan & Ketenagakerjaan).
+- **Manajemen Komponen Gaji**:
+  - Konfigurasi Gaji Pokok, Tunjangan Tetap, Tunjangan Tidak Tetap, dan Bonus.
+  - Skema Potongan: PPh 21, BPJS Kesehatan, BPJS Ketenagakerjaan, dan Potongan Lainnya.
+- **Proses Payroll (Payroll Run)**:
+  - Pembukaan periode payroll baru bulanan.
+  - Otomatisasi kalkulasi *Take Home Pay* (THP), PPh 21, dan BPJS.
+  - Preview & koreksi hasil perhitungan sebelum finalisasi.
+  - Finalisasi payroll & pembuatan slip gaji otomatis.
+- **Laporan & Export**:
+  - Export rekap payroll seluruh karyawan (PDF / Excel / CSV).
+  - Laporan rekap total biaya gaji per departemen.
+- **Audit Log**: Pencatatan aktivitas perubahan data sensitif penggajian.
 
-## Installation & updates
+### 👤 Role Karyawan (Self-Service)
+- **Akses Mandiri**: Login khusus karyawan dengan tampilan ringkas & ramah pengguna.
+- **Slip Gaji Digital**: View detail slip gaji per periode (Gaji Pokok, Tunjangan, Potongan, dan THP).
+- **Unduh PDF**: Cetak dan unduh slip gaji resmi format PDF.
+- **Keamanan Akun**: Fitur ubah password mandiri.
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+---
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+## 🔐 Hak Akses & Matriks Peran
 
-## Setup
+| Fitur | Admin | Karyawan |
+|---|:---:|:---:|
+| Login Sistem | ✅ | ✅ |
+| Kelola Data Karyawan, Departemen & Jabatan | ✅ | ❌ |
+| Kelola Komponen Gaji & Potongan | ✅ | ❌ |
+| Menjalankan Proses Payroll Run | ✅ | ❌ |
+| Review & Finalisasi Payroll | ✅ | ❌ |
+| Lihat & Export Laporan Rekap Payroll | ✅ | ❌ |
+| **Lihat & Unduh Slip Gaji Sendiri** | ✅ | ✅ |
+| Ubah Password Sendiri | ✅ | ✅ |
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+---
 
-## Important Change with index.php
+## 🛠️ Teknologi yang Digunakan
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+- **Backend**: PHP 8.2+, CodeIgniter 4.7
+- **Database**: MySQL / MariaDB
+- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5 / Admin Template
+- **Dependency Manager**: Composer
+- **Cetak Dokumen**: Dompdf / FPDF (PDF Generator)
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+---
 
-**Please** read the user guide for a better explanation of how CI4 works!
+## 🚀 Panduan Instalasi & Konfigurasi
 
-## Repository Management
+### 1. Prasyarat Sistem
+- PHP >= 8.2 (dengan ekstensi `intl`, `mbstring`, `mysqli`, `json`, `curl` aktif)
+- MySQL / MariaDB >= 8.0
+- Composer >= 2.x
+- Web Server (Apache / Nginx / XAMPP)
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+### 2. Kloning Repositori
+```bash
+git clone https://github.com/username/sistem-informasi-penggajian.git
+cd sistem-informasi-penggajian
+```
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+### 3. Instalasi Dependensi
+```bash
+composer install
+```
 
-## Server Requirements
+### 4. Konfigurasi Environment (`.env`)
+Salin file `env` menjadi `.env`:
+```bash
+cp env .env
+```
+Buka file `.env` dan atur konfigurasi database serta URL aplikasi:
+```ini
+CI_ENVIRONMENT = development
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+app.baseURL = 'http://localhost:8080/'
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+database.default.hostname = localhost
+database.default.database = db_gajian
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+```
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+### 5. Migrasi & Seeder Database
+Jalankan migrasi untuk membuat tabel database dan seeder untuk data awal akun:
+```bash
+php spark migrate
+php spark db:seed UserSeeder
+```
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+### 6. Menjalankan Server Lokal
+```bash
+php spark serve
+```
+Aplikasi dapat diakses melalui browser di `http://localhost:8080`.
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+---
+
+## 📂 Struktur Proyek
+
+```text
+gajian/
+├── app/
+├── Controllers/         # Logic Controller (Admin & Karyawan)
+│   ├── Database/            # Migrations & Seeders
+│   ├── Models/              # Database Models (Karyawan, Payroll, dll)
+│   └── Views/               # Template tampilan UI (Admin & Karyawan)
+├── public/                  # Asset publik (CSS, JS, Images, index.php)
+├── writable/                # File cache, logs, dan PDF ter-generate
+├── .env                     # Konfigurasi Environment
+├── composer.json            # Daftar dependensi PHP
+└── PRD.md                   # Product Requirements Document
+```
+
+---
+
+## 📝 Lisensi
+
+Proyek ini dilindungi di bawah lisensi [MIT License](LICENSE).
+
+---
+*Dibuat dengan ❤️ menggunakan CodeIgniter 4.*
